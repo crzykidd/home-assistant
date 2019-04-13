@@ -67,6 +67,14 @@ sensor:
       - icon
       - temperature
 
+binary_sensor:
+  - platform: template
+    sensors:
+      door:
+        device_class: opening
+        friendly_name: GarageDoor
+        value_template: "{{ is_state('sensor.garage_basement_door_sensor_access_control', '22') }}"
+      
 # Text to speech
 tts:
   - platform: google
@@ -86,4 +94,4 @@ cloud:
       include_domains:
         - light
         - climate
-  
+
