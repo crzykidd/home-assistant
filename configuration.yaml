@@ -21,6 +21,45 @@ zwave:
     light.office_front_lights_switch_level:
       refresh_value: true
       delay: 2
+    light.master_bedroom_wall_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.front_house_lights_switch_level:
+      refresh_value: true
+      delay: 2
+    light.outside_patio_soffit_lights_switch:
+      refresh_value: true
+      delay: 2
+    light.outside_patio_sconce_light:
+      refresh_value: true
+      delay: 2
+    light.outside_kitchen_sconce_lights:
+      refresh_value: true
+      delay: 2
+    light.stairs_light_switch_level:
+      refresh_value: true
+      delay: 2
+    light.downstairs_hall_dimmer_switch_level:
+      refresh_value: true
+      delay: 2
+    light.downstairs_bathroom_hall_dimmer_switch_level:
+      refresh_value: true
+      delay: 2
+    light.kitchen_fridge_light_wall_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.kitchen_sink_light_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.kitchen_deck_door_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.kitchen_table_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.living_room_fan_light_wall_dimmer_level:
+      refresh_value: true
+      delay: 2
 recorder:
   db_url: !secret db_mysql
 
@@ -29,6 +68,26 @@ recorder:
 # this is linked to ~/git-repos  
 ####  
 custom_updater:
+  show_installable: true
+  track:
+    - components
+    - python_scripts
+    - cards
+  component_urls:
+    - https://raw.githubusercontent.com/pnbruckner/homeassistant-config/master/custom_components.json
+  python_script_urls:
+    - https://raw.githubusercontent.com/pnbruckner/homeassistant-config/master/python_scripts.json  
+  card_urls:
+    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
+    
+
+####   Netatmo config
+#netatmo:
+#  api_key: !secret netatmo_api_key
+#  secret_key: !secret netatmo_secret_key
+#  username: !secret netatmo_username
+#  password: !secret netatmo_password
+#  discovery: false
   
 #### MyQ setup for Garage doors ####     
 cover:
@@ -53,6 +112,7 @@ discovery:
 #### Setup Influxdb access to send all stats ####
 influxdb:
   host: !secret influxdb_host
+  max_retries: 6
 
 
 # Sensors
@@ -66,7 +126,15 @@ sensor:
       - summary
       - icon
       - temperature
+  # Netatmo sensor setup
+#  - platform: netatmo
+#    station: Home
+#    modules:
+#      Server_Room:
+#      - co2
 
+        
+        
       
 #Fix Binary Sensors      
 binary_sensor:
@@ -87,7 +155,10 @@ binary_sensor:
         device_class: opening
         friendly_name: "Server Room Door"
         value_template: "{{ is_state('binary_sensor.server_room_door_sensor', 'on') }}"
-      
+      backdoor_vsensor:
+        device_class: opening
+        friendly_name: "Backdoor"
+        value_template: "{{ is_state('binary_sensor.backdoor_sensor', 'on') }}"      
 # Text to speech
 tts:
   - platform: google
@@ -104,8 +175,91 @@ ecobee:
 cloud:
   google_actions:
     filter:
-      include_domains:
-        - light
-        - climate
+      include_entities:
+        - light.office_front_lights_switch_level
+        - light.home_theater_back_left
+        - light.home_theater_back_right
+        - light.home_theater_front_right
+        - light.home_theater_front_left
+        - light.living_room_short_lamp
+        - light.living_room_tall_lamp
+        - light.outside_patio_soffit_lights_switch
+        - light.outside_patio_sconce_light
+        - light.kitchen_fridge_light_wall_dimmer_level
+        - light.kitchen_sink_light_dimmer_level
+        - light.kitchen_deck_door_dimmer_level
+        - light.kitchen_table_dimmer_level
+    entity_config:
+      light.office_front_lights_switch_level:
+        name: Office Lights
+        room: office
+        
+  alexa:
+    filter:
+      include_entities:
+        - light.office_front_lights_switch_level
+        - light.home_theater_back_left
+        - light.home_theater_back_right
+        - light.home_theater_front_right
+        - light.home_theater_front_left
+        - light.living_room_short_lamp
+        - light.living_room_tall_lamp
+        - light.outside_patio_soffit_lights_switch
+        - light.outside_patio_sconce_light
+        - light.kitchen_fridge_light_wall_dimmer_level
+        - light.kitchen_sink_light_dimmer_level
+        - light.kitchen_deck_door_dimmer_level
+        - light.kitchen_table_dimmer_level
+    entity_config:
+      light.office_front_lights_switch_level:
+        name: Office Lights
+
+    
 ##### Fine IOS Devices
 ios:
+
+#### Create a virtual switch
+switch:
+  - platform: command_line
+    switches:
+      override_google_announce:
+        command_on: "pwd"
+        command_off: "pwd"
+        
+        
+
+    
+#### Setup Philips Hue
+hue:
+  bridges:
+    - host: 192.168.50.150
+      allow_hue_groups: false 
+
+#### Custom Z-Wave Map      
+panel_custom:
+  - name: zwavegraph2
+    sidebar_title: Z-Wave Graph
+    sidebar_icon: mdi:access-point-network
+    url_path: zwave
+ 
+ 
+#### input Boolean switches for automation
+input_boolean:
+  door_tts_status:
+    name: Announcement - Door
+    initial: on
+  hot_tub_scene:
+    name: Hot Tub 
+    initial: off
+    
+   
+#### Add device tracker info
+device_tracker:
+  - platform: life360
+    username: !secret life360_username
+    password: !secret life360_password
+    interval_seconds: 27
+    max_gps_accuracy: 200
+   
+
+    
