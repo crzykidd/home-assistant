@@ -27,7 +27,7 @@ zwave:
     light.front_house_lights_switch_level:
       refresh_value: true
       delay: 2
-    light.outside_patio_soffit_lights_switch:
+    light.outside_patio_soffit_light_wall_dimmer_level:
       refresh_value: true
       delay: 2
     light.outside_patio_sconce_light:
@@ -263,4 +263,11 @@ device_tracker:
     max_gps_accuracy: 200
    
 
-    
+#### Input slider for preset values 
+input_number:
+  google_tts_announce_level:
+    name: Google Volume Level
+    initial: .5
+    min: .0
+    max: .99
+    step: .1
