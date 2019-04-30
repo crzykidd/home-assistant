@@ -1,0 +1,24 @@
+#######################################################
+### Sensor Configuration Settings                   ###
+#######################################################
+
+  - platform: template
+    sensors:
+      ### Makes Fibaro Sensor act like Binary sensor
+      garage_basement_door_vsensor:
+        device_class: opening
+        friendly_name: "Garage Basement Door"
+        value_template: "{{ is_state('sensor.garage_basement_door_sensor_access_control', '22') }}"
+      ### Makes AEON Labs ZW089 Recessed Door sensor show as door
+      office_slider_door_vsensor:
+        device_class: opening
+        friendly_name: "Office Slider Door"
+        value_template: "{{ is_state('binary_sensor.office_slider_sensor', 'on') }}"
+      server_room_door_vsensor:
+        device_class: opening
+        friendly_name: "Server Room Door"
+        value_template: "{{ is_state('binary_sensor.server_room_door_sensor', 'on') }}"
+      backdoor_vsensor:
+        device_class: opening
+        friendly_name: "Backdoor"
+        value_template: "{{ is_state('binary_sensor.backdoor_sensor', 'on') }}"   

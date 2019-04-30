@@ -20,22 +20,24 @@ zwave: !include zwave.yaml
 ### Check sensor.yaml for sensor settings ###
 sensor: !include sensor.yaml
 
+### Check binary_sensor.yaml for settings ###
+binary_sensor: !include binary_sensor.yaml
+   
+
   
-  
-  
-  
-  
-# Configure a default setup of Home Assistant (frontend, api, etc)
+### Configure a default setup of Home Assistant (frontend, api, etc) ###
 default_config:
+
+### Setup logging info ###
 logger:
 
+### Setup mysql db connection ###
 recorder:
   db_url: !secret db_mysql
 
-####   Custom Updater for addons  ####
-# from here:  https://github.com/custom-components/custom_updater/wiki/Installation   #
-# this is linked to ~/git-repos  
-####  
+###   Custom Updater for addons  ###
+# from here:  https://github.com/custom-components/custom_updater/wiki/Installation 
+
 custom_updater:
   show_installable: true
   track:
@@ -51,7 +53,7 @@ custom_updater:
     - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
     
 
-####   Netatmo config
+###   Netatmo config
 #netatmo:
 #  api_key: !secret netatmo_api_key
 #  secret_key: !secret netatmo_secret_key
@@ -59,58 +61,30 @@ custom_updater:
 #  password: !secret netatmo_password
 #  discovery: false
   
-#### MyQ setup for Garage doors ####     
+### MyQ setup for Garage doors ###
 cover:
   - platform: myq
     username: !secret myq_user
     password: !secret myq_password
     type: chamberlain
 
-    
-
-#### Setup external access ####
+### Setup external access ###
 http:
     base_url: !secret base_url
     use_x_forwarded_for: true
     trusted_proxies: 127.0.0.1
 
-# Discover some devices automatically
+### Discover some devices automatically ###
 discovery:
 
-#### Setup Influxdb access to send all stats ####
+### Setup Influxdb access to send all stats ###
 influxdb:
   host: !secret influxdb_host
   max_retries: 6
 
 
-# Sensors
-
-        
-        
       
-#Fix Binary Sensors      
-binary_sensor:
-  - platform: template
-    sensors:
-      ##### Makes Fibaro Sensor act like Binary sensor
-      garage_basement_door_vsensor:
-        device_class: opening
-        friendly_name: "Garage Basement Door"
-        value_template: "{{ is_state('sensor.garage_basement_door_sensor_access_control', '22') }}"
-      ##### Makes AEON Labs ZW089 Recessed Door sensor show as door
-      office_slider_door_vsensor:
-        device_class: opening
-        friendly_name: "Office Slider Door"
-        value_template: "{{ is_state('binary_sensor.office_slider_sensor', 'on') }}"
-      ##### Makes AEON Labs ZW089 Recessed Door sensor show as door
-      server_room_door_vsensor:
-        device_class: opening
-        friendly_name: "Server Room Door"
-        value_template: "{{ is_state('binary_sensor.server_room_door_sensor', 'on') }}"
-      backdoor_vsensor:
-        device_class: opening
-        friendly_name: "Backdoor"
-        value_template: "{{ is_state('binary_sensor.backdoor_sensor', 'on') }}"      
+
 # Text to speech
 tts:
   - platform: google_translate
