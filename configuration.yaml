@@ -22,8 +22,9 @@ sensor: !include sensor.yaml
 
 ### Check binary_sensor.yaml for settings ###
 binary_sensor: !include binary_sensor.yaml
-   
 
+### Setup for all things cloud like Google and Alexa ###
+cloud: !include cloud.yaml
   
 ### Configure a default setup of Home Assistant (frontend, api, etc) ###
 default_config:
@@ -100,47 +101,7 @@ scene: !include scene.yaml
 #  password: @secret tesla_password
 ecobee:
   api_key: !secret ecobee_api_key
-cloud:
-  google_actions:
-    filter:
-      include_entities:
-        - light.office_front_lights_switch_level
-        - light.home_theater_back_left
-        - light.home_theater_back_right
-        - light.home_theater_front_right
-        - light.home_theater_front_left
-        - light.living_room_short_lamp
-        - light.living_room_tall_lamp
-        - light.outside_patio_soffit_lights_switch
-        - light.outside_patio_sconce_light
-        - light.kitchen_fridge_light_wall_dimmer_level
-        - light.kitchen_sink_light_dimmer_level
-        - light.kitchen_deck_door_dimmer_level
-        - light.kitchen_table_dimmer_level
-    entity_config:
-      light.office_front_lights_switch_level:
-        name: Office Lights
-        room: office
-        
-  alexa:
-    filter:
-      include_entities:
-        - light.office_front_lights_switch_level
-        - light.home_theater_back_left
-        - light.home_theater_back_right
-        - light.home_theater_front_right
-        - light.home_theater_front_left
-        - light.living_room_short_lamp
-        - light.living_room_tall_lamp
-        - light.outside_patio_soffit_lights_switch
-        - light.outside_patio_sconce_light
-        - light.kitchen_fridge_light_wall_dimmer_level
-        - light.kitchen_sink_light_dimmer_level
-        - light.kitchen_deck_door_dimmer_level
-        - light.kitchen_table_dimmer_level
-    entity_config:
-      light.office_front_lights_switch_level:
-        name: Office Lights
+
 
     
 ##### Fine IOS Devices
