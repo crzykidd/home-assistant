@@ -12,54 +12,23 @@ homeassistant:
   time_zone: America/Los_Angeles
   # Customization file
   customize: !include customize.yaml
+  packages: !include_dir_named packages
 
+### Check ZWAVE config file for device settings ###
+zwave: !include zwave.yaml
+  
+### Check sensor.yaml for sensor settings ###
+sensor: !include sensor.yaml
+
+  
+  
+  
+  
+  
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 logger:
-zwave:
-  device_config:
-    light.office_front_lights_switch_level:
-      refresh_value: true
-      delay: 2
-    light.master_bedroom_wall_dimmer_level:
-      refresh_value: true
-      delay: 2
-    light.front_house_lights_switch_level:
-      refresh_value: true
-      delay: 2
-    light.outside_patio_soffit_light_wall_dimmer_level:
-      refresh_value: true
-      delay: 2
-    light.outside_patio_sconce_light:
-      refresh_value: true
-      delay: 2
-    light.outside_kitchen_sconce_lights:
-      refresh_value: true
-      delay: 2
-    light.stairs_light_switch_level:
-      refresh_value: true
-      delay: 2
-    light.downstairs_hall_dimmer_switch_level:
-      refresh_value: true
-      delay: 2
-    light.downstairs_bathroom_hall_dimmer_switch_level:
-      refresh_value: true
-      delay: 2
-    light.kitchen_fridge_light_wall_dimmer_level:
-      refresh_value: true
-      delay: 2
-    light.kitchen_sink_light_dimmer_level:
-      refresh_value: true
-      delay: 2
-    light.kitchen_deck_door_dimmer_level:
-      refresh_value: true
-      delay: 2
-    light.kitchen_table_dimmer_level:
-      refresh_value: true
-      delay: 2
-    light.living_room_fan_light_wall_dimmer_level:
-      refresh_value: true
-      delay: 2
+
 recorder:
   db_url: !secret db_mysql
 
@@ -98,8 +67,6 @@ cover:
     type: chamberlain
 
     
-# Show the introduction message on startup. 
-introduction:
 
 #### Setup external access ####
 http:
@@ -117,22 +84,6 @@ influxdb:
 
 
 # Sensors
-sensor:
-  # Weather prediction
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    forecast:
-      - 3
-    monitored_conditions:
-      - summary
-      - icon
-      - temperature
-  # Netatmo sensor setup
-#  - platform: netatmo
-#    station: Home
-#    modules:
-#      Server_Room:
-#      - co2
 
         
         
@@ -162,11 +113,13 @@ binary_sensor:
         value_template: "{{ is_state('binary_sensor.backdoor_sensor', 'on') }}"      
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+scene: !include scene.yaml
 
 #tesla:
 #  username: !secret tesla_username
@@ -271,3 +224,11 @@ input_number:
     min: .0
     max: .99
     step: .1
+
+mqtt:
+  broker: docker01
+  client_id: homeassitant_docker
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  discovery: true
+

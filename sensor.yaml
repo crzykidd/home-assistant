@@ -1,0 +1,18 @@
+#######################################################
+### Sensor Configuration Settings                   ###
+#######################################################
+
+### Weather prediction using darksky ###
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 3
+    monitored_conditions:
+      - summary
+      - icon
+      - temperature
+
+### HA Uptime Sensor ###
+  - platform: uptime
+    name: "HA runtime in minutes"
+    unit_of_measurement: minutes

@@ -4,3 +4,12 @@ light.hgrp_0000000062:
   hidden: true
 binary_sensor.server_room_door_sensor:
   hidden: true
+person.matthew_andersen:
+  entity_picture: /local/images/matthew.png
+person.tosha:
+  entity_picture: /local/images/tosha.png
+person.curtis:
+  entity_picture: /local/images/curtis.png
+person.clara:
+  entity_picture: /local/images/clara.png
+  

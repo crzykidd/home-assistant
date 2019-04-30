@@ -1,0 +1,7 @@
+#### Turn hot tub lights on and off
+action: []
+id: DUMMY
+alias: DUMMY Can Be Deleted After First Automation Has Been Added
+hide_entity: no # default no, hide from UI
+condition: []
+trigger: []

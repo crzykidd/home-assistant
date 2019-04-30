@@ -1,0 +1,51 @@
+#######################################################
+### ZWAVE Configuration Settings                    ###
+#######################################################
+
+ 
+ device_config:
+    light.office_front_lights_switch_level:
+      refresh_value: true
+      delay: 3
+    light.master_bedroom_wall_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.front_house_lights_switch_level:
+      refresh_value: true
+      delay: 2
+    light.outside_patio_soffit_light_wall_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.outside_patio_sconce_light:
+      refresh_value: true
+      delay: 2
+    light.outside_kitchen_sconce_lights:
+      refresh_value: true
+      delay: 2
+    light.stairs_light_switch_level:
+      refresh_value: true
+      delay: 2
+    light.downstairs_hall_dimmer_switch_level:
+      refresh_value: true
+      delay: 3
+    light.downstairs_bathroom_hall_dimmer_switch_level:
+      refresh_value: true
+      delay: 3
+    light.kitchen_fridge_light_wall_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.kitchen_sink_light_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.kitchen_deck_door_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.kitchen_table_dimmer_level:
+      refresh_value: true
+      delay: 2
+    light.living_room_fan_light_wall_dimmer_level:
+      refresh_value: true
+      delay: 3
+    light.claras_bedroom_wall_dimmer_level:
+      refresh_value: true
+      delay: 3

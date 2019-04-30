@@ -1,0 +1,6 @@
+- name: Kitchen Lights On
+  entities: {}
+- name: Kitchen Lights Off
+  entities: {}
+
+  
