@@ -17,10 +17,12 @@
         - light.kitchen_sink_light_dimmer_level
         - light.kitchen_deck_door_dimmer_level
         - light.kitchen_table_dimmer_level
+        - input_boolean.hot_tub_scene
     entity_config:
       light.office_front_lights_switch_level:
         name: Office Lights
         room: office
+      
         
   alexa:
     filter:
@@ -38,6 +40,7 @@
         - light.kitchen_sink_light_dimmer_level
         - light.kitchen_deck_door_dimmer_level
         - light.kitchen_table_dimmer_level
+        - input_boolean.hot_tub_scene
     entity_config:
       light.office_front_lights_switch_level:
         name: Office Lights

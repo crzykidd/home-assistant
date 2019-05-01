@@ -36,6 +36,15 @@ logger:
 recorder:
   db_url: !secret db_mysql
 
+### Light Groups ###
+light:
+  - platform: group
+    name: Kitchen Cabinet Lights
+    entities:
+      - light.kitchen_uc_led01
+      - light.kitchen_uc_led02
+      - light.kitchen_uc_led03
+
 ###   Custom Updater for addons  ###
 # from here:  https://github.com/custom-components/custom_updater/wiki/Installation 
 
